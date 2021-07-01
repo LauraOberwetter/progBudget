@@ -1,24 +1,25 @@
-//does their need to be a db file to save the cached data?
+//cache data in relation to indexdb
 const FILES_TO_CACHE = [
     '/',
     '/index.html',
     '/index.js',
-    '/models/transaction.js',
-    '/public/styles.css',
-    '/routes/api.js',
-    '/manifest.webmanifest', //does the manifest have to be cached?
-    //do icons have to be cached?
+    '/styles.css',
+    '/manifest.webmanifest', //does the manifest have to be cached? google
+    //cache icons
     'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
   ];
   
   const PRECACHE = 'precache-v1';
   const RUNTIME = 'runtime';
+  const DATA_CACHE_NAME = "data-cache-v1"; //ref activity 13
   
   self.addEventListener('install', (event) => {
     event.waitUntil(
       caches
         .open(PRECACHE)
-        .then((cache) => cache.addAll(FILES_TO_CACHE))
+        .then((cache) => {
+            console.log("installing!!!")
+            cache.addAll(FILES_TO_CACHE)})
         .then(self.skipWaiting())
     );
   });
@@ -45,6 +46,7 @@ const FILES_TO_CACHE = [
   
   self.addEventListener('fetch', (event) => {
     if (event.request.url.startsWith(self.location.origin)) {
+
       event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
           if (cachedResponse) {

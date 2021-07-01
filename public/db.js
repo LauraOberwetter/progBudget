@@ -3,19 +3,28 @@
 let db;
 
 
-// Create a new db request for a "budget" database.
-const request = indexedDB.open('BudgetDB', budgetVersion || 21);
+// Create a new db request for a "budgetDB" database (dbName, versionInt)
+// send open request to IndexedDB database, returns the request object
+const request = indexedDB.open('budgetDB', budgetVersion || 1);
 
+//test collection
+db.BudgetDB.insert({purchase: "test"});
+
+
+//triggered when a newer version of the db than the stored db is loaded
+//triggered when trying to create new db or trying to upgrade db with a new version
+// create object store within this function
 request.onupgradeneeded = function (e) {
   console.log('Upgrade needed in IndexDB');
 
-  const { oldVersion } = e;
-  const newVersion = e.newVersion || db.version;
+   const { oldVersion } = e;
+   const newVersion = e.newVersion || db.version;
 
-  console.log(`DB Updated from version ${oldVersion} to ${newVersion}`);
+   console.log(`DB Updated from version ${oldVersion} to ${newVersion}`);
 
   db = e.target.result;
 
+  //creating object store -- BudgetStore
   if (db.objectStoreNames.length === 0) {
     db.createObjectStore('BudgetStore', { autoIncrement: true });
   }

@@ -24,12 +24,13 @@ request.onupgradeneeded = function (e) {
 
   db = e.target.result;
 
-  //creating object store -- BudgetStore
+  //creating object store -- BudgetStore, generate auto incremented integer keys
   if (db.objectStoreNames.length === 0) {
     db.createObjectStore('BudgetStore', { autoIncrement: true });
   }
 };
 
+//onerror event handler
 request.onerror = function (e) {
   console.log(`Woops! ${e.target.errorCode}`);
 };

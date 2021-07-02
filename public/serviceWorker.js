@@ -3,6 +3,7 @@ const FILES_TO_CACHE = [
     '/',
     '/index.html',
     '/index.js',
+    '/db.js',
     '/styles.css',
     '/manifest.webmanifest', //does the manifest have to be cached? google
     //cache icons

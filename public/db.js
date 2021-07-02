@@ -1,7 +1,6 @@
 //ref activity 26, unit 17
 let db;
 
-
 // Create a new db request for a "budgetDB" database (dbName, versionInt)
 // send open request to IndexedDB database, returns the request object
 const request = indexedDB.open('budgetDB', budgetVersion || 1);

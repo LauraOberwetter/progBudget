@@ -20,7 +20,7 @@ const FILES_TO_CACHE = [
         .open(PRECACHE)
         .then((cache) => {
             console.log("installing!!!")
-            cache.addAll(FILES_TO_CACHE)})
+            return cache.addAll(FILES_TO_CACHE)})
         .then(self.skipWaiting())
     );
   });

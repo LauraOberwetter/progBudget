@@ -3,10 +3,10 @@ let db;
 
 // Create a new db request for a "budgetDB" database (dbName, versionInt)
 // send open request to IndexedDB database, returns the request object
-const request = indexedDB.open('budgetDB', budgetVersion || 1);
+const request = indexedDB.open('budgetDB', 1);
 
 //test collection
-db.BudgetDB.insert({purchase: "test"});
+//db.BudgetDB.insert({purchase: "test"});
 
 
 //triggered when a newer version of the db than the stored db is loaded
@@ -20,11 +20,11 @@ request.onupgradeneeded = function (e) {
 
    console.log(`DB Updated from version ${oldVersion} to ${newVersion}`);
 
-  db = e.target.result;
+  db = e.target.result; // db has value at this point
 
   //creating object store -- BudgetStore, generate auto incremented integer keys
   if (db.objectStoreNames.length === 0) {
-    db.createObjectStore('BudgetStore', { autoIncrement: true });
+    db.createObjectStore('BudgetStore', { autoIncrement: true }); //db created
   }
 };
 

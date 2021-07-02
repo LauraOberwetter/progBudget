@@ -1,5 +1,4 @@
 //ref activity 26, unit 17
-
 let db;
 
 
